@@ -103,3 +103,15 @@ MCP uses **JSON-RPC 2.0** format. Think of it like a specific way to structure m
 
 3.So yes, the request/response "layer is sorted" by MCP standard!
 You just plug your tool definitions into the standard format.
+
+4.Source: tools/list - Clients can list available tools through this endpoint 
+
+5.A decorator is basically a function that wraps another function and adds extra stuff to it. Instead of modifying the original function, you wrap it with @decorator_name and it does extra work before, after, or around that function.
+
+6.Decorators reduce boilerplate and make your code cleaner. For tool definitions, they let developers focus on writing the logic without worrying about metadata and registration.Retry
+
+7.Why Two Classes?
+
+ToolSchema: Clean, JSON-safe, LLM-friendly (no functions, just metadata)
+ToolDefinition: Executable, Python-based, backend-only (includes the actual function)
+
