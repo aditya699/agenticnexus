@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nul)",
+      "Bash(.env)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install parallel-web)",
+      "Bash(uv pip install:*)",
+      "Bash(timeout /t 5)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
