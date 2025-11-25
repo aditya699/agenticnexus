@@ -3,7 +3,7 @@ Web search tool using Parallel API.
 """
 import os
 from parallel import Parallel
-from agenticnexus.tools.base import tool
+from ...base import tool
 
 
 @tool(

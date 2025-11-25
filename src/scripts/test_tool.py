@@ -21,10 +21,10 @@ result = web_search(
 print("✅ Tool executed!")
 print(f"Found {result['total']} results\n")
 
-for i, r in enumerate(result['results'], 1):
-    print(f"--- Result {i} ---")
-    print(f"Title: {r['title']}")
-    print(f"URL: {r['url']}")
-    print(f"Date: {r.get('publish_date', 'N/A')}")
-    print(f"Excerpt: {r['excerpt'][:30000]}...")
-    print()
+with open("test_tool_output.txt", "w", encoding="utf-8") as f:
+    for i, r in enumerate(result['results'], 1):
+        f.write(f"--- Result {i} ---\n")
+        f.write(f"Title: {r['title']}\n")
+        f.write(f"URL: {r['url']}\n")
+        f.write(f"Date: {r.get('publish_date', 'N/A')}\n")
+        f.write(f"Excerpt: {r['excerpt'][:30000]}...\n\n")

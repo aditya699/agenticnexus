@@ -115,3 +115,12 @@ You just plug your tool definitions into the standard format.
 ToolSchema: Clean, JSON-safe, LLM-friendly (no functions, just metadata)
 ToolDefinition: Executable, Python-based, backend-only (includes the actual function)
 
+8.Anthropic designed MCP to use JSON-RPC 2.0. All MCP clients (Claude, ChatGPT, etc.) send requests in this format.
+
+9.Key Difference
+| Aspect            | REST                          | JSON-RPC (MCP)                |
+|-------------------|------------------------------|-------------------------------|
+| Endpoint          | Many (/search, /tools, /execute) | One (/mcp)                    |
+| Action determined by | HTTP path + method          | method field in JSON           |
+| Request format    | Custom (your choice)          | Standard JSON-RPC format       |
+| Response format   | Custom (your choice)          | Standard JSON-RPC format       |
