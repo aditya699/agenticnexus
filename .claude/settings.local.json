@@ -5,7 +5,14 @@
       "Bash(.env)",
       "Bash(\".venv/Scripts/python.exe\" -m pip install parallel-web)",
       "Bash(uv pip install:*)",
-      "Bash(timeout /t 5)"
+      "Bash(timeout /t 5)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(timeout:*)",
+      "Bash(\"venv/Scripts/python.exe\" -c \"from mcp.server.fastmcp import FastMCP; help(FastMCP.run)\")",
+      "Bash(\"venv/Scripts/python.exe\":*)",
+      "Bash(\"venv/Scripts/python.exe\" \"src/agenticnexus/mcp_server.py\")",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,4 @@
-fastapi
-h2
-httpx
+mcp[cli]
 parallel-web
 pydantic
 pydantic-settings
@@ -10,4 +8,4 @@ pytest-cov
 python-dotenv
 requests
 ruff
-uvicorn
+openai

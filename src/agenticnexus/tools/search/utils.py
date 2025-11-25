@@ -1,52 +1,41 @@
 """
-Web search tool using Parallel API.
+Web search utility functions using Parallel API.
 """
 import os
 from parallel import Parallel
-from ...base import tool
 
 
-@tool(
-    name="web_search",
-    description="Search the web for information using multiple search queries to achieve an objective."
-)
-def web_search(
+def search_web(
     objective: str,
-    search_queries: list,
+    search_queries: list[str],
     max_results: int = 5,
     max_chars_per_result: int = 500
 ) -> dict:
-    """
-    Search the web using Parallel API.
-    
+    """Execute web search using Parallel API.
+
     Args:
         objective: High-level goal (e.g., "Latest news in India")
-        search_queries: List of specific search queries (e.g., ["India news", "India today"])
-        max_results: Maximum number of results to return (default: 5)
-        max_chars_per_result: Maximum characters per result excerpt (default: 500)
-        
+        search_queries: List of specific search queries
+        max_results: Maximum number of results to return
+        max_chars_per_result: Maximum characters per result excerpt
+
     Returns:
-        Dictionary with search results
+        Dictionary with search results or error information
     """
     api_key = os.getenv("PARALLEL_API_KEY")
-    
+
     if not api_key:
-        return {
-            "error": "PARALLEL_API_KEY not configured",
-            "results": []
-        }
-    
+        return {"error": "PARALLEL_API_KEY not configured", "results": []}
+
     try:
         client = Parallel(api_key=api_key)
-        
         search = client.beta.search(
             objective=objective,
             search_queries=search_queries,
             max_results=max_results,
             max_chars_per_result=max_chars_per_result
         )
-        
-        # Extract results
+
         results = []
         for result in search.results:
             results.append({
@@ -55,16 +44,12 @@ def web_search(
                 "excerpt": result.excerpts[0] if result.excerpts else "",
                 "publish_date": result.publish_date
             })
-        
+
         return {
             "objective": objective,
             "search_queries": search_queries,
             "results": results,
             "total": len(results)
         }
-        
     except Exception as e:
-        return {
-            "error": str(e),
-            "results": []
-        }
+        return {"error": str(e), "results": []}
