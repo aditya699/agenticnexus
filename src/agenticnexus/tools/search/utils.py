@@ -2,10 +2,10 @@
 Web search utility functions using Parallel API.
 """
 import os
-from parallel import Parallel
+from parallel import AsyncParallel
 
 
-def search_web(
+async def search_web(
     objective: str,
     search_queries: list[str],
     max_results: int = 5,
@@ -28,8 +28,8 @@ def search_web(
         return {"error": "PARALLEL_API_KEY not configured", "results": []}
 
     try:
-        client = Parallel(api_key=api_key)
-        search = client.beta.search(
+        client = AsyncParallel(api_key=api_key)
+        search = await client.beta.search(
             objective=objective,
             search_queries=search_queries,
             max_results=max_results,

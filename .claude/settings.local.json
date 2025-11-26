@@ -12,7 +12,10 @@
       "Bash(\"venv/Scripts/python.exe\" -c \"from mcp.server.fastmcp import FastMCP; help(FastMCP.run)\")",
       "Bash(\"venv/Scripts/python.exe\":*)",
       "Bash(\"venv/Scripts/python.exe\" \"src/agenticnexus/mcp_server.py\")",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(git log:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []

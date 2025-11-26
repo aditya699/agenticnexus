@@ -124,3 +124,5 @@ ToolDefinition: Executable, Python-based, backend-only (includes the actual func
 | Action determined by | HTTP path + method          | method field in JSON           |
 | Request format    | Custom (your choice)          | Standard JSON-RPC format       |
 | Response format   | Custom (your choice)          | Standard JSON-RPC format       |
+
+10.Simple command to start the server venv\Scripts\python.exe src\agenticnexus\mcp_server.py

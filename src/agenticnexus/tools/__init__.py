@@ -5,7 +5,7 @@ This module provides centralized tool registration for the MCP server.
 """
 from mcp.server.fastmcp import FastMCP
 
-from . import search
+from . import search, writing_style
 
 
 def register_all_tools(mcp: FastMCP) -> None:
@@ -15,7 +15,4 @@ def register_all_tools(mcp: FastMCP) -> None:
         mcp: The FastMCP server instance
     """
     search.register(mcp)
-    # Add more tool modules here as needed:
-    # database.register(mcp)
-    # files.register(mcp)
-    # etc.
+    writing_style.register(mcp)

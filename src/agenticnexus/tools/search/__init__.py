@@ -10,7 +10,7 @@ def register(mcp: FastMCP) -> None:
     """Register search tools with the MCP server."""
 
     @mcp.tool()
-    def web_search(
+    async def web_search(
         objective: str,
         search_queries: list[str],
         max_results: int = 5,
@@ -24,7 +24,7 @@ def register(mcp: FastMCP) -> None:
             max_results: Maximum number of results to return
             max_chars_per_result: Maximum characters per result excerpt
         """
-        return search_web(
+        return await search_web(
             objective=objective,
             search_queries=search_queries,
             max_results=max_results,
