@@ -69,14 +69,15 @@ def chat_with_streaming(user_input):
                 "type": "mcp",
                 "server_label": "agenticnexus",
                 "server_description": "AgenticNexus MCP server with web search capability",
-                "server_url": "https://f1e58e02c6e5.ngrok-free.app/sse",
+                "server_url": "https://c8d6c4a39bbf.ngrok-free.app/sse",
                 "require_approval": "never"
             }
         ],
         input=input_messages,
         reasoning={"effort": "low"},
         text={"verbosity": "low"},
-        stream=True
+        stream=True,
+        timeout=None
     )
     
     assistant_started = False
