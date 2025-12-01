@@ -3,6 +3,7 @@ Search tools for AgenticNexus MCP Server.
 """
 from mcp.server.fastmcp import FastMCP
 
+from .schemas import SearchResponse
 from .utils import search_web
 
 
@@ -15,7 +16,7 @@ def register(mcp: FastMCP) -> None:
         search_queries: list[str],
         max_results: int = 5,
         max_chars_per_result: int = 500
-    ) -> dict:
+    ) -> SearchResponse:
         """Search the web for information using multiple search queries to achieve an objective.
 
         Args:

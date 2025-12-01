@@ -15,7 +15,8 @@
       "Bash(curl:*)",
       "Bash(find:*)",
       "Bash(git log:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(\"venv/Scripts/python.exe\" -c \"\nfrom agenticnexus.tools.search import register\nfrom agenticnexus.tools.writing_style import register\nprint(''All tool registrations OK'')\n\")"
     ],
     "deny": [],
     "ask": []

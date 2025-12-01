@@ -2,7 +2,10 @@
 Web search utility functions using Parallel API.
 """
 import os
+
 from parallel import AsyncParallel
+
+from .schemas import SearchResponse, SearchResult
 
 
 async def search_web(
@@ -10,7 +13,7 @@ async def search_web(
     search_queries: list[str],
     max_results: int = 5,
     max_chars_per_result: int = 500
-) -> dict:
+) -> SearchResponse:
     """Execute web search using Parallel API.
 
     Args:
@@ -20,36 +23,37 @@ async def search_web(
         max_chars_per_result: Maximum characters per result excerpt
 
     Returns:
-        Dictionary with search results or error information
+        SearchResponse with results
+
+    Raises:
+        ValueError: If PARALLEL_API_KEY is not configured
     """
     api_key = os.getenv("PARALLEL_API_KEY")
 
     if not api_key:
-        return {"error": "PARALLEL_API_KEY not configured", "results": []}
+        raise ValueError("PARALLEL_API_KEY not configured")
 
-    try:
-        client = AsyncParallel(api_key=api_key)
-        search = await client.beta.search(
-            objective=objective,
-            search_queries=search_queries,
-            max_results=max_results,
-            max_chars_per_result=max_chars_per_result
+    client = AsyncParallel(api_key=api_key)
+    search = await client.beta.search(
+        objective=objective,
+        search_queries=search_queries,
+        max_results=max_results,
+        max_chars_per_result=max_chars_per_result
+    )
+
+    results = [
+        SearchResult(
+            url=result.url,
+            title=result.title,
+            excerpt=result.excerpts[0] if result.excerpts else "",
+            publish_date=result.publish_date
         )
+        for result in search.results
+    ]
 
-        results = []
-        for result in search.results:
-            results.append({
-                "url": result.url,
-                "title": result.title,
-                "excerpt": result.excerpts[0] if result.excerpts else "",
-                "publish_date": result.publish_date
-            })
-
-        return {
-            "objective": objective,
-            "search_queries": search_queries,
-            "results": results,
-            "total": len(results)
-        }
-    except Exception as e:
-        return {"error": str(e), "results": []}
+    return SearchResponse(
+        objective=objective,
+        search_queries=search_queries,
+        results=results,
+        total=len(results)
+    )

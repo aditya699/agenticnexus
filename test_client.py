@@ -69,7 +69,7 @@ def chat_with_streaming(user_input):
                 "type": "mcp",
                 "server_label": "agenticnexus",
                 "server_description": "AgenticNexus MCP server with web search capability",
-                "server_url": "https://c8d6c4a39bbf.ngrok-free.app/sse",
+                "server_url": os.getenv("NGROK_URL"),
                 "require_approval": "never"
             }
         ],
