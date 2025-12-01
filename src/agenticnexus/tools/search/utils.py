@@ -4,6 +4,7 @@ Web search utility functions using Parallel API.
 import os
 
 from parallel import AsyncParallel
+from mcp.server.fastmcp import Context  # ← Add this import
 
 from .schemas import SearchResponse, SearchResult
 
@@ -12,7 +13,8 @@ async def search_web(
     objective: str,
     search_queries: list[str],
     max_results: int = 5,
-    max_chars_per_result: int = 500
+    max_chars_per_result: int = 500,
+    ctx: Context = None  # ← Add this parameter
 ) -> SearchResponse:
     """Execute web search using Parallel API.
 
@@ -33,6 +35,14 @@ async def search_web(
     if not api_key:
         raise ValueError("PARALLEL_API_KEY not configured")
 
+    #BEFORE API CALL
+    if ctx:
+        await ctx.report_progress(
+            progress=0.3,
+            total=1.0,
+            message="Calling search API..."
+        )
+
     client = AsyncParallel(api_key=api_key)
     search = await client.beta.search(
         objective=objective,
@@ -40,6 +50,14 @@ async def search_web(
         max_results=max_results,
         max_chars_per_result=max_chars_per_result
     )
+
+    #AFTER API CALL
+    if ctx:
+        await ctx.report_progress(
+            progress=0.7,
+            total=1.0,
+            message=f"Got {len(search.results)} results, processing..."
+        )
 
     results = [
         SearchResult(

@@ -1,7 +1,7 @@
 """
 Search tools for AgenticNexus MCP Server.
 """
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import Context, FastMCP  # ← Add Context import
 
 from .schemas import SearchResponse
 from .utils import search_web
@@ -15,7 +15,8 @@ def register(mcp: FastMCP) -> None:
         objective: str,
         search_queries: list[str],
         max_results: int = 5,
-        max_chars_per_result: int = 500
+        max_chars_per_result: int = 500,
+        ctx: Context = None  # ← Add context parameter
     ) -> SearchResponse:
         """Search the web for information using multiple search queries to achieve an objective.
 
@@ -29,5 +30,6 @@ def register(mcp: FastMCP) -> None:
             objective=objective,
             search_queries=search_queries,
             max_results=max_results,
-            max_chars_per_result=max_chars_per_result
+            max_chars_per_result=max_chars_per_result,
+            ctx=ctx  # ← Pass context down
         )

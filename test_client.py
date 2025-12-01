@@ -86,7 +86,12 @@ def chat_with_streaming(user_input):
     
     for event in stream:
         event_type = event.type
-        
+
+        # Log EVERY event to see what we get
+        print(f"{Colors.HEADER}[DEBUG] Event type: {event_type}{Colors.END}")
+        if hasattr(event, '__dict__'):
+            print(f"{Colors.HEADER}[DEBUG] Event data: {event.__dict__}{Colors.END}")
+
         # Capture response ID
         if event_type == "response.created":
             response_id = event.response.id
