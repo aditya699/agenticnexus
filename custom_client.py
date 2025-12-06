@@ -357,7 +357,7 @@ async def process_query(query: str, session: ClientSession, openai_tools: list):
 
 async def main():
     """Main hybrid client - connects to MCP server directly."""
-    server_url = "http://localhost:8000/sse"
+    server_url = "http://localhost:8002/sse"
 
     # Display banner
     print_banner()
